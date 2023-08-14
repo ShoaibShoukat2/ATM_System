@@ -1,0 +1,43 @@
+{% include 'base.html' %}
+{% block main_content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+
+    <form method="POST" action="/account_verifiction/">
+
+        {% if error_message %}
+        <script>
+            alert("{{ error_message }}");
+        </script>
+    {% endif %}
+
+        {% csrf_token %}
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <input type="number" name="account_no" placeholder="Account No" id="form2Example2" class="form-control" />
+        </div>
+      
+        <!-- 2 column grid layout for inline styling -->
+        <div class="row mb-4">
+          <div class="col d-flex justify-content-center">
+            <!-- Checkbox -->
+            
+          </div>
+        </div>
+      
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+      
+        <!-- Register buttons -->
+       
+      </form>
+
+</div>
+
+
+{% endblock main_content %}

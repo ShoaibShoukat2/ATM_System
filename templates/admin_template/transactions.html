@@ -1,0 +1,56 @@
+{% extends 'admin_template/base.html' %}
+{% block main_content %}
+<main style="margin-top: 58px">
+    <div class="container pt-4">
+      <!-- Section: Main chart -->
+      <section class="mb-4">
+        <div class="card">
+          <div class="card-header py-3">
+            <h5 class="mb-0 text-center"><strong>Customers</strong></h5>
+          </div>
+          <table class="table align-middle mb-0 bg-white">
+            <thead class="bg-light">
+              <tr>
+                <th>id</th>
+                <th>Transaction Date</th>
+                <th>Transaction Amount</th>
+                <th>Transaction Status</th>
+                <th>Customer</th>
+                <th>Location</th>
+              </tr>
+            </thead>
+          
+            <tbody>
+              {% for items in transactions %}
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="ms-3">
+                      <p class="fw-bold mb-1">{{items.id}}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <p class="fw-normal mb-1">{{items.transaction_date}}</p>
+                </td>
+                <td>{{items.transaction_amount}} $</td>
+                <td>{{items.transaction_status}}</td>
+                <td>{{items.customer}}</td>
+                <td>{{items.atm}}</td>
+                <td>
+                  
+                </td>
+                
+              </tr>
+              {% endfor %}
+              <!-- You can add more rows here if needed -->
+            </tbody>
+          </table>
+
+          
+        </div>
+      </section>
+      <!-- Section: Main chart --> 
+    </div>
+  </main>
+{% endblock main_content %}

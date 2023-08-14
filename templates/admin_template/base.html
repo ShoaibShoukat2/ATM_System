@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Admin</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  <!-- MDB -->
+  <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!--Main Navigation-->
+  <header>
+    <!-- Sidebar -->
+    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+      <div class="position-sticky">
+        <div class="list-group list-group-flush mx-3 mt-4">
+          <a href="/admin_signin" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <i class="fas fa-user-shield fa-fw me-3"></i><span>Admin</span>
+          </a>
+          
+          
+          <a href="/admin_panel/insert" class="list-group-item list-group-item-action py-2 ripple"><i class="fas fa-pencil-alt fa-fw me-3"></i><span>Insert</span></a>
+          <a href="/transaction_details" class="list-group-item list-group-item-action py-2 ripple"> <i class="fas fa-trash-alt fa-fw me-3"></i><span>Transactions</span></a>
+          <a href="/admin_panel" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fas fa-users fa-fw me-3"></i><span>Users</span></a>
+        </div>
+      </div>
+    </nav>
+    <!-- Sidebar -->
+
+    <!-- Navbar -->
+    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
+          aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Brand -->
+        <a class="navbar-brand fw-bold" href="/admin_panel">
+          Bank Admin
+        </a>
+        <a class="navbar-brand fw-bold" href="/">
+          Home
+        </a>
+        <!-- Right links -->
+       
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+  </header>
+  <!--Main Navigation-->
+
+  <!--Main layout-->
+  {% block main_content %}
+  {% endblock main_content %}
+  
+  <!--Main layout-->
+  <!-- MDB -->
+  <script type="text/javascript" src="{% static 'admin_js/mdb.min.js' %}"></script>
+  <!-- Custom scripts -->
+  <script type="text/javascript" src="{% static 'admin_js/admin.js'}"></script>
+
+</body>
+
+</html>
