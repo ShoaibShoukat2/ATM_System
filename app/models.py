@@ -9,6 +9,8 @@ class Customers(models.Model):
     name = models.CharField(max_length=100,default='')
     amount = models.IntegerField(default=0)
     account_id = models.IntegerField(default=0)
+    customer_cpr = models.CharField(max_length=100,default='')
+    pin_code = models.CharField(max_length=4,default='')
 
 
     def __str__(self):

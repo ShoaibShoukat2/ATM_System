@@ -25,6 +25,8 @@ def insert(request):
         email = request.POST.get('email')
         amount = request.POST.get('amount')
         account_id = request.POST.get('account_id')
+        customercpr =  request.POST.get('customercpr')
+        pincode = request.POST.get('pincode')
         
         # Check if the email already exists in the database
         if Customers.objects.filter(email=email).exists():
@@ -32,9 +34,8 @@ def insert(request):
             return render(request, 'admin_template/insert.html', {'error_message': error_message})
         
         # Create a new customer if the email doesn't exist
-        new_customer = Customers(name=name, email=email, amount=amount, account_id=account_id)
+        new_customer = Customers(name=name, email=email, amount=amount, account_id=account_id,customer_cpr=customercpr,pin_code=pincode)
         new_customer.save()
-        
         return redirect('/admin_panel/')  # Redirect to a suitable page after successful insertion
         
     return render(request, 'admin_template/insert.html')
@@ -49,6 +50,9 @@ def edit(request, pk):
         email = request.POST.get('email')
         amount = request.POST.get('amount')
         account_id = request.POST.get('account_id')
+        customercpr = request.POST.get('customercpr')
+        pincode = request.POST.get('pincode')
+
 
         customer = Customers.objects.get(pk=pk)  # Assuming Customers is the model representing your customer data
 
@@ -57,6 +61,8 @@ def edit(request, pk):
         customer.email = email
         customer.amount = amount
         customer.account_id = account_id
+        customer.customer_cpr = customercpr
+        customer.pin_code = pincode
         customer.save()
 
       
