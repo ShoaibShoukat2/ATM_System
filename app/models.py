@@ -11,6 +11,7 @@ class Customers(models.Model):
     account_id = models.IntegerField(default=0)
     customer_cpr = models.CharField(max_length=100,default='')
     pin_code = models.CharField(max_length=4,default='')
+    password = models.CharField(max_length=10,default='')
 
 
     def __str__(self):

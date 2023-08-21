@@ -27,6 +27,7 @@ def insert(request):
         account_id = request.POST.get('account_id')
         customercpr =  request.POST.get('customercpr')
         pincode = request.POST.get('pincode')
+        password =  request.POST.get('password')
         
         # Check if the email already exists in the database
         if Customers.objects.filter(email=email).exists():
@@ -34,7 +35,7 @@ def insert(request):
             return render(request, 'admin_template/insert.html', {'error_message': error_message})
         
         # Create a new customer if the email doesn't exist
-        new_customer = Customers(name=name, email=email, amount=amount, account_id=account_id,customer_cpr=customercpr,pin_code=pincode)
+        new_customer = Customers(name=name, email=email, amount=amount, account_id=account_id,customer_cpr=customercpr,pin_code=pincode,password=password)
         new_customer.save()
         return redirect('/admin_panel/')  # Redirect to a suitable page after successful insertion
         
@@ -52,6 +53,7 @@ def edit(request, pk):
         account_id = request.POST.get('account_id')
         customercpr = request.POST.get('customercpr')
         pincode = request.POST.get('pincode')
+        password =  request.POST.get('password')
 
 
         customer = Customers.objects.get(pk=pk)  # Assuming Customers is the model representing your customer data
@@ -63,9 +65,8 @@ def edit(request, pk):
         customer.account_id = account_id
         customer.customer_cpr = customercpr
         customer.pin_code = pincode
+        customer.password = password
         customer.save()
-
-      
         
         return redirect('admin_panel')  # Redirect to a suitable page after successful update
         
@@ -77,29 +78,39 @@ def delete(request, pk):
     return redirect('/admin_panel/') 
 
 def account_verifiction(request):
-
     if request.method == 'POST':
         accountNo = request.POST.get('account_no')
+        pincode = request.POST.get('pincode')
+        password = request.POST.get('password')
+
         try:
             customer = Customers.objects.get(account_id=accountNo)
-            atm_data = ATM.objects.all()
 
-            if customer:
+            # Assuming 'pincode' and 'password' are attributes in the 'Customers' model
+            if customer.pin_code == pincode and customer.password == password:
+                # Password and pincode match, proceed with the verification
+
+                atm_data = ATM.objects.all()
+
                 context = {
-                    'user_data':customer,
-                    'atm_data':atm_data
+                    'user_data': customer,
+                    'atm_data': atm_data
                 }
-                return render(request,'profile.html',context)
+                return render(request, 'profile.html', context)
+            else:
+                # Password and/or pincode do not match
+                context = {
+                    'error_message': 'Invalid pincode and/or password'
+                }
+                return render(request, 'account_verifi.html', context)
+
         except ObjectDoesNotExist:
-
             context = {
-                'error_message':'Not Found, Contact With Admin'
+                'error_message': 'Account not found. Please contact the administrator.'
             }
-            return render(request,'account_verifi.html',context)
+            return render(request, 'account_verifi.html', context)
 
-
-    return render(request,'account_verifi.html')
-
+    return render(request, 'account_verifi.html')
 def transaction_form(request):
     if request.method == 'POST':
         customer_id = request.POST.get('customer_id')
@@ -178,4 +189,3 @@ def admin_signin(request):
 
             return render(request,'sigin.html',context)
     return render(request,'sigin.html')
-
